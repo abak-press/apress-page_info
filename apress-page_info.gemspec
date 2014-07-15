@@ -21,10 +21,8 @@ Gem::Specification.new do |spec|
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
-
-  # automatic changelog builder
+  spec.add_development_dependency 'rspec'
+  spec.add_development_dependency 'rspec-rails'
   spec.add_development_dependency 'changelogger'
-
-  # a tool for uploading files to private gem repo
   spec.add_development_dependency 'multipart-post'
 end
