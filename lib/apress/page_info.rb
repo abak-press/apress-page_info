@@ -26,6 +26,8 @@ module Apress
                  :set_custom_title,
                  :set_custom_header,
 
+                 :title_postfix,
+
                  :to => :page_info
 
         helper_method :page_title
