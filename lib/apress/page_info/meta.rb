@@ -10,6 +10,7 @@ module Apress
 
       attr_reader :title_variables,
                   :title_key,
+                  :postfix_key,
                   :header_key,
                   :description_key,
                   :custom_title,
@@ -70,6 +71,8 @@ module Apress
         vars = (title_variables || {}).merge(
           :default => [controller_key.to_sym, default_key.to_sym]
         )
+
+        return I18n.t!("#{action_scope.join('.')}.#{postfix_key}", vars) if postfix_key
         I18n.t!(action_key, vars)
       end
 
@@ -110,6 +113,11 @@ module Apress
       def set_title_key(key)
         raise ArgumentError unless key.is_a?(String)
         @title_key = key
+      end
+
+      def set_postfix_key(key)
+        raise ArgumentError unless key.is_a?(String)
+        @postfix_key = key
       end
 
       # это использовать в наследниках

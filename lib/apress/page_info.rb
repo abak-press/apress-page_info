@@ -17,6 +17,9 @@ module Apress
                  :title_key,
                  :set_title_key,
 
+                 :postfix_key,
+                 :set_postfix_key,
+
                  :header_key,
                  :set_header_key,
 
