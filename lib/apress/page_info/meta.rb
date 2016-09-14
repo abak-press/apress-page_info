@@ -1,7 +1,4 @@
 # coding: utf-8
-require 'i18n'
-require 'active_support/inflector'
-
 module Apress
   module PageInfo
     class Meta
@@ -20,43 +17,46 @@ module Apress
         @controller = controller
       end
 
-      # вычисление названия страницы
+      # Public: вычисление названия страницы
+      #
+      # Returns String
       def page_title
         return c.last_error if c.respond_to?(:last_error?) && c.last_error?
         return compact_spaces(@custom_title) if @custom_title.present?
 
-        key  = nil_if_blank(title_key) || :title
-        vars = (title_variables || {}).merge(
-          :scope => action_scope
-        )
+        key = title_key.presence || :title
+        default_vars = {scope: action_scope}
 
-        compact_spaces(I18n.t!(key, vars) + title_postfix)
+        vars = title_variables.present? ? default_vars.merge!(title_variables) : default_vars
+
+        compact_spaces("#{I18n.t!(key, vars)}#{title_postfix}")
       end
 
-      # вычисление заголовка (h1) страницы
+      # Public: вычисление заголовка (h1) страницы
+      #
+      # Returns String
       def page_header
-        return '' if c.last_error?
+        return '' if c.respond_to?(:last_error?) && c.last_error?
         return compact_spaces(@custom_header) if @custom_header.present?
 
-        key = nil_if_blank(header_key) || :header
+        key = header_key.presence || :header
+        default_vars = {scope: action_scope, default: ''}
 
-        vars = (title_variables || {}).merge(
-          :scope   => action_scope,
-          :default => ''
-        )
+        vars = title_variables.present? ? default_vars.merge!(title_variables) : default_vars
 
         compact_spaces(I18n.t!(key, vars))
       end
 
-      # вычисление описания страницы
+      # Public: вычисление описания страницы
+      #
+      # Returns String
       def page_description
-        return '' if c.last_error?
+        return '' if c.respond_to?(:last_error?) && c.last_error?
 
-        key  = nil_if_blank(description_key) || :description
-        vars = (title_variables || {}).merge(
-          :scope   => action_scope,
-          :default => ''
-        )
+        key = description_key.presence || :description
+        default_vars = {scope: action_scope, default: ''}
+
+        vars = title_variables.present? ? default_vars.merge!(title_variables) : default_vars
 
         compact_spaces(I18n.t!(key, vars))
       end
@@ -74,12 +74,6 @@ module Apress
 
         return I18n.t!("#{action_scope.join('.')}.#{postfix_key}", vars) if postfix_key
         I18n.t!(action_key, vars)
-      end
-
-    protected
-
-      def nil_if_blank(string)
-        string.is_a?(String) && !string.blank? ? string : nil
       end
 
       def action_scope
@@ -152,6 +146,5 @@ module Apress
         value.gsub(/[ ]+/, ' ').gsub(/ ([\,\.\:\!])/, '\1')
       end
     end
-
   end
 end

@@ -1,45 +1,46 @@
 # coding: utf-8
 require 'apress/page_info/version'
+require 'active_support'
 
 module Apress
   module PageInfo
+    extend ActiveSupport::Concern
+
     autoload :Meta, 'apress/page_info/meta'
 
-    def self.included(base)
-      base.class_eval do
-        delegate :page_title,
-                 :page_header,
-                 :page_description,
+    included do
+      delegate :page_title,
+               :page_header,
+               :page_description,
 
-                 :title_variables,
-                 :set_title_variables,
+               :title_variables,
+               :set_title_variables,
 
-                 :title_key,
-                 :set_title_key,
+               :title_key,
+               :set_title_key,
 
-                 :postfix_key,
-                 :set_postfix_key,
+               :postfix_key,
+               :set_postfix_key,
 
-                 :header_key,
-                 :set_header_key,
+               :header_key,
+               :set_header_key,
 
-                 :description_key,
-                 :set_description_key,
+               :description_key,
+               :set_description_key,
 
-                 :set_custom_title,
-                 :set_custom_header,
+               :set_custom_title,
+               :set_custom_header,
 
-                 :title_postfix,
+               :title_postfix,
 
-                 :to => :page_info
+               :to => :page_info
 
-        helper_method :page_title
-        helper_method :page_header
-        helper_method :page_description
-        helper_method :title_key
-        helper_method :header_key
-        helper_method :description_key
-      end
+      helper_method :page_title
+      helper_method :page_header
+      helper_method :page_description
+      helper_method :title_key
+      helper_method :header_key
+      helper_method :description_key
     end
 
     def page_info
