@@ -1,0 +1,16 @@
+ru:
+  pages:
+    anonymous:
+      postfix: '- Awesome site'
+      index:
+        foo:
+          title: 'foo title'
+          header: 'foo header'
+          description: 'foo description'
+        title: 'awesome title'
+        header: 'awesome header'
+        description: 'awesome descritpion'
+      foo:
+        title: 'title with vars %{foo}'
+        header: 'header with vars %{foo}'
+        description: 'description with vars %{foo}'

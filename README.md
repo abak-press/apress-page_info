@@ -1,12 +1,14 @@
 # Apress::PageInfo
 
+<a href="http://dolly.railsc.ru/projects/181/builds/latest/?ref=master"><img src="http://dolly.railsc.ru/badges/abak-press/apress-page_info/master" height="18"></a>
+
 title, header, description для веб страницы
 
 ## Gem Releasing
 
-### Правила версионирования: 
+### Правила версионирования:
 
-http://semver.org 
+http://semver.org
 
 ### Если релизим находясь в форке:
 
