@@ -3,7 +3,7 @@ module Apress
   module PageInfo
     class Meta
       attr_accessor :controller
-      alias :c :controller
+      alias_method :c, :controller
 
       attr_reader :title_variables,
                   :title_key,
@@ -100,7 +100,7 @@ module Apress
       # это использовать в наследниках
       def set_title_variables(vars)
         raise ArgumentError unless vars.is_a?(Hash)
-        @title_variables = vars
+        @title_variables = vars.symbolize_keys
       end
 
       # это использовать в наследниках

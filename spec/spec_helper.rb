@@ -9,6 +9,7 @@ SimpleCov.start 'rails' do
 end
 
 require 'apress/page_info'
+require 'pry-debugger'
 
 require 'combustion'
 Combustion.initialize! :action_controller do

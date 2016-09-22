@@ -1,6 +1,8 @@
 # coding: utf-8
+
 require 'apress/page_info/version'
 require 'active_support'
+require 'apress/page_info/seo_config'
 
 module Apress
   module PageInfo
@@ -43,8 +45,56 @@ module Apress
       helper_method :description_key
     end
 
+    module ClassMethods
+      # Public: defines callback for given set of actions
+      #
+      # actions - set of actions
+      #
+      # Returns nothing
+      def define_seo_for(*actions)
+        before_filter :seo_for_page, only: actions
+      end
+    end
+
     def page_info
       @page_info ||= Meta.new(self)
+    end
+
+    private
+
+    # Internal: defines seo meta (title, description, header) for given action
+    #
+    # Returns nothing
+    def seo_for_page
+      %w(title description header).each { |meta| send("set_#{meta}_key", "#{seo_condition[:prefix]}#{meta}") }
+
+      set_title_variables(seo_variables)
+    end
+
+    # Internal: seo configuration for given action
+    #
+    # Returns Array, list of different conditions
+    def seo_config
+      Apress::PageInfo::SeoConfig.storage[:"#{controller_name}/#{action_name}"]
+    end
+
+    # Internal: finds suitable condition of seo
+    #
+    # Returns Hash
+    def seo_condition
+      return @seo_condition if defined?(@seo_condition)
+      return @seo_condition = {} unless seo_config
+
+      @seo_condition = seo_config.find do |conf|
+        condition = conf.fetch(:condition)
+
+        condition.respond_to?(:call) ? instance_exec(&conf.fetch(:condition)) : condition
+      end
+    end
+
+    def seo_variables
+      variables = seo_condition.fetch(:variables)
+      variables.respond_to?(:call) ? instance_exec(&variables) : variables
     end
   end
 end

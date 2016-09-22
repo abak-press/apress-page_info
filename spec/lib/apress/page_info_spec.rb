@@ -5,6 +5,12 @@ AnonymousController = Class.new(ActionController::Base)
 RSpec.describe Apress::PageInfo, type: :controller do
   controller AnonymousController do
     include Apress::PageInfo
+
+    define_seo_for :index
+
+    def index
+      render nothing: true
+    end
   end
 
   let(:postfix) { I18n.t('pages.anonymous.postfix') }
@@ -153,6 +159,77 @@ RSpec.describe Apress::PageInfo, type: :controller do
   describe '#title_postfix' do
     context 'when default' do
       it { expect(controller.title_postfix).to eq I18n.t('pages.anonymous.postfix') }
+    end
+  end
+
+  describe '.define_seo_for' do
+    let!(:seo_config_before) { Apress::PageInfo::SeoConfig.storage }
+
+    after { Apress::PageInfo::SeoConfig.storage = seo_config_before }
+
+    before do
+      Apress::PageInfo::SeoConfig.configure do
+        seo_for :'anonymous/index' do
+          config :seo_for_user do
+            desc 'Seo meta for user'
+            condition -> { signed_in? }
+            variables(foo: 'bar')
+          end
+
+          config :seo_for_guest do
+            desc 'Seo meta for guest'
+            variables(foo: 'fiz')
+          end
+        end
+      end
+    end
+
+    context 'when guest' do
+      before do
+        allow(controller).to receive_messages(
+          :signed_in? => false
+        )
+      end
+
+      it 'defines title, description and header for guest' do
+        get :index
+
+        expect(controller.page_title).to eq(
+          "#{I18n.t('pages.anonymous.index.seo_for_guest.title', foo: 'fiz')}#{postfix}"
+        )
+
+        expect(controller.page_description).to eq(
+          I18n.t('pages.anonymous.index.seo_for_guest.description', foo: 'fiz')
+        )
+
+        expect(controller.page_header).to eq(
+          I18n.t('pages.anonymous.index.seo_for_guest.header', foo: 'fiz')
+        )
+      end
+    end
+
+    context 'when user' do
+      before do
+        allow(controller).to receive_messages(
+          :signed_in? => true
+        )
+      end
+
+      it 'defines title, description and header for user' do
+        get :index
+
+        expect(controller.page_title).to eq(
+          "#{I18n.t('pages.anonymous.index.seo_for_user.title', foo: 'bar')}#{postfix}"
+        )
+
+        expect(controller.page_description).to eq(
+          I18n.t('pages.anonymous.index.seo_for_user.description', foo: 'bar')
+        )
+
+        expect(controller.page_header).to eq(
+          I18n.t('pages.anonymous.index.seo_for_user.header', foo: 'bar')
+        )
+      end
     end
   end
 end
