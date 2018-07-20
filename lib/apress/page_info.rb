@@ -14,6 +14,7 @@ module Apress
       delegate :page_title,
                :page_header,
                :page_description,
+               :page_keywords,
 
                :title_variables,
                :set_title_variables,
@@ -30,6 +31,9 @@ module Apress
                :description_key,
                :set_description_key,
 
+               :keywords_key,
+               :set_keywords_key,
+
                :set_custom_title,
                :set_custom_header,
 
@@ -40,9 +44,11 @@ module Apress
       helper_method :page_title
       helper_method :page_header
       helper_method :page_description
+      helper_method :page_keywords
       helper_method :title_key
       helper_method :header_key
       helper_method :description_key
+      helper_method :keywords_key
     end
 
     module ClassMethods
@@ -62,11 +68,11 @@ module Apress
 
     private
 
-    # Internal: defines seo meta (title, description, header) for given action
+    # Internal: defines seo meta (title, description, keywords, header) for given action
     #
     # Returns nothing
     def seo_for_page
-      %w(title description header).each { |meta| send("set_#{meta}_key", "#{seo_condition[:prefix]}#{meta}") }
+      %w(title description keywords header).each { |meta| send("set_#{meta}_key", "#{seo_condition[:prefix]}#{meta}") }
 
       set_title_variables(seo_variables)
     end

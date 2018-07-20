@@ -10,6 +10,7 @@ module Apress
                   :postfix_key,
                   :header_key,
                   :description_key,
+                  :keywords_key,
                   :custom_title,
                   :custom_header
 
@@ -54,6 +55,20 @@ module Apress
         return '' if c.respond_to?(:last_error?) && c.last_error?
 
         key = description_key.presence || :description
+        default_vars = {scope: action_scope, default: ''}
+
+        vars = title_variables.present? ? default_vars.merge!(title_variables) : default_vars
+
+        compact_spaces(I18n.t!(key, vars))
+      end
+
+      # Public: вычисление ключевых слов страницы
+      #
+      # Returns String
+      def page_keywords
+        return '' if c.respond_to?(:last_error?) && c.last_error?
+
+        key = keywords_key.presence || :keywords
         default_vars = {scope: action_scope, default: ''}
 
         vars = title_variables.present? ? default_vars.merge!(title_variables) : default_vars
@@ -124,6 +139,11 @@ module Apress
       def set_description_key(key)
         raise ArgumentError unless key.is_a?(String)
         @description_key = key
+      end
+
+      def set_keywords_key(key)
+        raise ArgumentError unless key.is_a?(String)
+        @keywords_key = key
       end
 
       def set_custom_title(title)
