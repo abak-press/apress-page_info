@@ -1,19 +1,19 @@
-appraise 'activesupport3.1' do
-  gem 'activesupport', '~> 3.1.12'
+appraise 'rails3.2' do
+  gem 'rails', '~> 3.2.0'
+  gem "strong_parameters", ">= 0.2", require: false
 end
 
-appraise 'activesupport3.2' do
-  gem 'activesupport', '~> 3.2.0'
+appraise 'rails4.0' do
+  gem 'rails', '~> 4.0.0'
+  gem 'protected_attributes'
 end
 
-appraise 'activesupport4.0' do
-  gem 'activesupport', '~> 4.0.0'
+appraise 'rails4.1' do
+  gem 'rails', '~> 4.1.0'
+  gem 'protected_attributes'
 end
 
-appraise 'activesupport4.1' do
-  gem 'activesupport', '~> 4.1.0'
-end
-
-appraise 'activesupport4.2' do
-  gem 'activesupport', '~> 4.2.0'
+appraise 'rails4.2' do
+  gem 'rails', '~> 4.2.0'
+  gem 'protected_attributes'
 end

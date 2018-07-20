@@ -50,11 +50,7 @@ RSpec.describe Apress::PageInfo, type: :controller do
         allow(controller).to receive(:params).and_return(action: :foo)
       end
 
-      it do
-        expect(controller.page_title).to eq(
-          "#{I18n.t('pages.anonymous.foo.title', foo: :bar)}#{postfix}"
-        )
-      end
+      it { expect(controller.page_title).to eq "#{I18n.t('pages.anonymous.foo.title', foo: :bar)}#{postfix}" }
     end
 
     context 'when setted custom title' do
@@ -68,7 +64,7 @@ RSpec.describe Apress::PageInfo, type: :controller do
 
   describe '#page_header' do
     context 'when default' do
-      it { expect(controller.page_header).to eq "#{I18n.t('pages.anonymous.index.header')}" }
+      it { expect(controller.page_header).to eq I18n.t('pages.anonymous.index.header') }
     end
 
     context 'when last_error given' do
@@ -84,7 +80,7 @@ RSpec.describe Apress::PageInfo, type: :controller do
         controller.send(:set_header_key, 'foo.header')
       end
 
-      it { expect(controller.page_header).to eq "#{I18n.t('pages.anonymous.index.foo.header')}" }
+      it { expect(controller.page_header).to eq I18n.t('pages.anonymous.index.foo.header') }
     end
 
     context 'when not exist locale for given action' do
@@ -100,9 +96,7 @@ RSpec.describe Apress::PageInfo, type: :controller do
       end
 
       it do
-        expect(controller.page_header).to eq(
-          "#{I18n.t('pages.anonymous.foo.header', foo: :bar)}"
-        )
+        expect(controller.page_header).to eq I18n.t('pages.anonymous.foo.header', foo: :bar)
       end
     end
 
@@ -117,7 +111,7 @@ RSpec.describe Apress::PageInfo, type: :controller do
 
   describe '#page_description' do
     context 'when default' do
-      it { expect(controller.page_description).to eq "#{I18n.t('pages.anonymous.index.description')}" }
+      it { expect(controller.page_description).to eq I18n.t('pages.anonymous.index.description') }
     end
 
     context 'when last_error given' do
@@ -133,7 +127,7 @@ RSpec.describe Apress::PageInfo, type: :controller do
         controller.send(:set_description_key, 'foo.description')
       end
 
-      it { expect(controller.page_description).to eq "#{I18n.t('pages.anonymous.index.foo.description')}" }
+      it { expect(controller.page_description).to eq I18n.t('pages.anonymous.index.foo.description') }
     end
 
     context 'when not exist locale for given action' do
@@ -148,11 +142,45 @@ RSpec.describe Apress::PageInfo, type: :controller do
         allow(controller).to receive(:params).and_return(action: :foo)
       end
 
-      it do
-        expect(controller.page_description).to eq(
-          "#{I18n.t('pages.anonymous.foo.description', foo: :bar)}"
-        )
+      it { expect(controller.page_description).to eq I18n.t('pages.anonymous.foo.description', foo: :bar) }
+    end
+  end
+
+  describe '#page_keywords' do
+    context 'when default' do
+      it { expect(controller.page_keywords).to eq I18n.t('pages.anonymous.index.keywords') }
+    end
+
+    context 'when last_error given' do
+      before do
+        allow(controller).to receive_messages(:last_error => 'Something wrong', :last_error? => true)
       end
+
+      it { expect(controller.page_keywords).to be_empty }
+    end
+
+    context 'when given custom keywords key' do
+      before do
+        controller.send(:set_keywords_key, 'foo.keywords')
+      end
+
+      it { expect(controller.page_keywords).to eq I18n.t('pages.anonymous.index.foo.keywords') }
+    end
+
+    context 'when not exist locale for given action' do
+      before { allow(controller).to receive(:params).and_return(action: :noname) }
+
+      it { expect { controller.page_keywords }.not_to raise_error }
+    end
+
+    context 'when with variables' do
+      before do
+        controller.send(:set_title_variables, foo: :bar)
+        allow(controller).to receive(:params).and_return(action: :foo)
+      end
+
+      it { expect(controller.page_description).to eq I18n.t('pages.anonymous.foo.description', foo: :bar) }
+      it { expect(controller.page_keywords).to eq I18n.t('pages.anonymous.foo.keywords', foo: :bar) }
     end
   end
 
@@ -197,14 +225,9 @@ RSpec.describe Apress::PageInfo, type: :controller do
         expect(controller.page_title).to eq(
           "#{I18n.t('pages.anonymous.index.seo_for_guest.title', foo: 'fiz')}#{postfix}"
         )
-
-        expect(controller.page_description).to eq(
-          I18n.t('pages.anonymous.index.seo_for_guest.description', foo: 'fiz')
-        )
-
-        expect(controller.page_header).to eq(
-          I18n.t('pages.anonymous.index.seo_for_guest.header', foo: 'fiz')
-        )
+        expect(controller.page_description).to eq I18n.t('pages.anonymous.index.seo_for_guest.description', foo: 'fiz')
+        expect(controller.page_keywords).to eq I18n.t('pages.anonymous.index.seo_for_guest.keywords', foo: 'fiz')
+        expect(controller.page_header).to eq I18n.t('pages.anonymous.index.seo_for_guest.header', foo: 'fiz')
       end
     end
 
@@ -221,14 +244,9 @@ RSpec.describe Apress::PageInfo, type: :controller do
         expect(controller.page_title).to eq(
           "#{I18n.t('pages.anonymous.index.seo_for_user.title', foo: 'bar')}#{postfix}"
         )
-
-        expect(controller.page_description).to eq(
-          I18n.t('pages.anonymous.index.seo_for_user.description', foo: 'bar')
-        )
-
-        expect(controller.page_header).to eq(
-          I18n.t('pages.anonymous.index.seo_for_user.header', foo: 'bar')
-        )
+        expect(controller.page_description).to eq I18n.t('pages.anonymous.index.seo_for_user.description', foo: 'bar')
+        expect(controller.page_keywords).to eq I18n.t('pages.anonymous.index.seo_for_user.keywords', foo: 'bar')
+        expect(controller.page_header).to eq I18n.t('pages.anonymous.index.seo_for_user.header', foo: 'bar')
       end
     end
   end
