@@ -179,8 +179,44 @@ RSpec.describe Apress::PageInfo, type: :controller do
         allow(controller).to receive(:params).and_return(action: :foo)
       end
 
-      it { expect(controller.page_description).to eq I18n.t('pages.anonymous.foo.description', foo: :bar) }
       it { expect(controller.page_keywords).to eq I18n.t('pages.anonymous.foo.keywords', foo: :bar) }
+    end
+  end
+
+  describe '#page_promo_text' do
+    context 'when default' do
+      it { expect(controller.page_promo_text).to eq I18n.t('pages.anonymous.index.promo_text') }
+    end
+
+    context 'when last_error given' do
+      before do
+        allow(controller).to receive_messages(:last_error => 'Something wrong', :last_error? => true)
+      end
+
+      it { expect(controller.page_promo_text).to be_empty }
+    end
+
+    context 'when given custom promo_text key' do
+      before do
+        controller.send(:set_promo_text_key, 'foo.promo_text')
+      end
+
+      it { expect(controller.page_promo_text).to eq I18n.t('pages.anonymous.index.foo.promo_text') }
+    end
+
+    context 'when not exist locale for given action' do
+      before { allow(controller).to receive(:params).and_return(action: :noname) }
+
+      it { expect { controller.page_promo_text }.not_to raise_error }
+    end
+
+    context 'when with variables' do
+      before do
+        controller.send(:set_title_variables, foo: :bar)
+        allow(controller).to receive(:params).and_return(action: :foo)
+      end
+
+      it { expect(controller.page_promo_text).to eq I18n.t('pages.anonymous.foo.promo_text', foo: :bar) }
     end
   end
 

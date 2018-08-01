@@ -11,6 +11,7 @@ module Apress
                   :header_key,
                   :description_key,
                   :keywords_key,
+                  :promo_text_key,
                   :custom_title,
                   :custom_header
 
@@ -69,6 +70,20 @@ module Apress
         return '' if c.respond_to?(:last_error?) && c.last_error?
 
         key = keywords_key.presence || :keywords
+        default_vars = {scope: action_scope, default: ''}
+
+        vars = title_variables.present? ? default_vars.merge!(title_variables) : default_vars
+
+        compact_spaces(I18n.t!(key, vars))
+      end
+
+      # Public: вычисление промо текста на странице
+      #
+      # Returns String
+      def page_promo_text
+        return '' if c.respond_to?(:last_error?) && c.last_error?
+
+        key = promo_text_key.presence || :promo_text
         default_vars = {scope: action_scope, default: ''}
 
         vars = title_variables.present? ? default_vars.merge!(title_variables) : default_vars
@@ -144,6 +159,11 @@ module Apress
       def set_keywords_key(key)
         raise ArgumentError unless key.is_a?(String)
         @keywords_key = key
+      end
+
+      def set_promo_text_key(key)
+        raise ArgumentError unless key.is_a?(String)
+        @promo_text_key = key
       end
 
       def set_custom_title(title)

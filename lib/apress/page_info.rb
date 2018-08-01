@@ -15,6 +15,7 @@ module Apress
                :page_header,
                :page_description,
                :page_keywords,
+               :page_promo_text,
 
                :title_variables,
                :set_title_variables,
@@ -34,6 +35,9 @@ module Apress
                :keywords_key,
                :set_keywords_key,
 
+               :promo_text_key,
+               :set_promo_text_key,
+
                :set_custom_title,
                :set_custom_header,
 
@@ -45,10 +49,12 @@ module Apress
       helper_method :page_header
       helper_method :page_description
       helper_method :page_keywords
+      helper_method :page_promo_text
       helper_method :title_key
       helper_method :header_key
       helper_method :description_key
       helper_method :keywords_key
+      helper_method :promo_text_key
     end
 
     module ClassMethods
@@ -68,11 +74,13 @@ module Apress
 
     private
 
-    # Internal: defines seo meta (title, description, keywords, header) for given action
+    # Internal: defines seo meta (title, description, keywords, header, promo_text) for given action
     #
     # Returns nothing
     def seo_for_page
-      %w(title description keywords header).each { |meta| send("set_#{meta}_key", "#{seo_condition[:prefix]}#{meta}") }
+      %w(title description keywords header promo_text).each do |meta|
+        send("set_#{meta}_key", "#{seo_condition[:prefix]}#{meta}")
+      end
 
       set_title_variables(seo_variables)
     end
