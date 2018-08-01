@@ -1,3 +1,11 @@
+# v0.4.0
+
+* 2018-07-31 [9e15bea](../../commit/9e15bea) - __(Aleksey Bukin)__ Release 0.4.0 
+* 2018-07-31 [87dc4b9](../../commit/87dc4b9) - __(Aleksey Bukin)__ feature(page): появилась поддержка промо текста для страницы 
+тот что в блоке .snippet :)
+
+https://jira.railsc.ru/browse/PC4-22519
+
 # v0.3.0
 
 * 2018-07-20 [8a67df2](../../commit/8a67df2) - __(Aleksey Bukin)__ fix(readme): добавлен keywords в список метатегов 
@@ -5,7 +13,6 @@
 
 https://jira.railsc.ru/browse/PC4-22477
 
-* 2018-07-20 [13d280a](../../commit/13d280a) - __(Aleksey Bukin)__ Release 0.3.0 
 * 2018-07-20 [49f7817](../../commit/49f7817) - __(Aleksey Bukin)__ dip and drone, integrate 
 * 2018-07-20 [0b8bca4](../../commit/0b8bca4) - __(Aleksey Bukin)__ feature(meta): появилась поддержка мета-тега keywords 
 https://jira.railsc.ru/browse/PC4-22477
