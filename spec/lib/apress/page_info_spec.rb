@@ -144,6 +144,12 @@ RSpec.describe Apress::PageInfo, type: :controller do
 
       it { expect(controller.page_description).to eq I18n.t('pages.anonymous.foo.description', foo: :bar) }
     end
+
+    context 'when setted custom description' do
+      before { controller.send(:set_custom_description, 'custom description') }
+
+      it { expect(controller.page_description).to eq('custom description') }
+    end
   end
 
   describe '#page_keywords' do
