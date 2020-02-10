@@ -13,6 +13,7 @@ module Apress
                   :keywords_key,
                   :promo_text_key,
                   :custom_title,
+                  :custom_description,
                   :custom_header
 
       def initialize(controller)
@@ -54,6 +55,7 @@ module Apress
       # Returns String
       def page_description
         return '' if c.respond_to?(:last_error?) && c.last_error?
+        return compact_spaces(@custom_description) if @custom_description.present?
 
         key = description_key.presence || :description
         default_vars = {scope: action_scope, default: ''}
@@ -171,6 +173,14 @@ module Apress
           false
         else
           @custom_title = title
+        end
+      end
+
+      def set_custom_description(description)
+        if description.blank?
+          false
+        else
+          @custom_description = description
         end
       end
 

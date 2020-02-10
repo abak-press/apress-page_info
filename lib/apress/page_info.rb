@@ -39,6 +39,7 @@ module Apress
                :set_promo_text_key,
 
                :set_custom_title,
+               :set_custom_description,
                :set_custom_header,
 
                :title_postfix,
