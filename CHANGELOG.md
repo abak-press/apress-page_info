@@ -1,6 +1,11 @@
+# v0.5.0
+
+* 2020-02-20 [5dc3bbe](../../commit/5dc3bbe) - __(terentev)__ Release 0.5.0 
+* 2020-01-23 [3a2b0e6](../../commit/3a2b0e6) - __(terentev)__ feat: add ability to set custom description 
+https://jira.railsc.ru/browse/GOODS-2164
+
 # v0.4.0
 
-* 2018-07-31 [9e15bea](../../commit/9e15bea) - __(Aleksey Bukin)__ Release 0.4.0 
 * 2018-07-31 [87dc4b9](../../commit/87dc4b9) - __(Aleksey Bukin)__ feature(page): появилась поддержка промо текста для страницы 
 тот что в блоке .snippet :)
 
