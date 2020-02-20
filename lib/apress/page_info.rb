@@ -40,6 +40,7 @@ module Apress
 
                :set_custom_title,
                :set_custom_header,
+               :set_custom_description,
 
                :title_postfix,
 
