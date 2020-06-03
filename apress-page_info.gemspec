@@ -29,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'combustion'
   spec.add_development_dependency 'tzinfo'
   spec.add_development_dependency 'actionpack', '>= 3.2', '< 5.0'
+  spec.add_development_dependency 'pry-byebug'
 end

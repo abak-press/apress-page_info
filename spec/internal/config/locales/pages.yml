@@ -1,34 +1,35 @@
 ru:
   pages:
-    anonymous:
-      postfix: '- Awesome site'
-      index:
+    anonym:
+      anonymous:
+        postfix: '- Awesome site'
+        index:
+          foo:
+            title: 'foo title'
+            header: 'foo header'
+            description: 'foo description'
+            keywords: 'foo keywords'
+            promo_text: 'foo promo text'
+          seo_for_user:
+            title: 'hello user - %{foo}'
+            description: 'description for user - %{foo}'
+            keywords: 'keywords for user - %{foo}'
+            promo_text: 'promo text for user - %{foo}'
+            header: 'header for user - %{foo}'
+          seo_for_guest:
+            title: 'hello guest - %{foo}'
+            description: 'descritpion for guest - %{foo}'
+            keywords: 'keywords for guest - %{foo}'
+            promo_text: 'promo text for guest - %{foo}'
+            header: 'header for guest - %{foo}'
+          title: 'awesome title'
+          header: 'awesome header'
+          description: 'awesome descritpion'
+          keywords: 'awesome keywords'
+          promo_text: 'awesome promo text'
         foo:
-          title: 'foo title'
-          header: 'foo header'
-          description: 'foo description'
-          keywords: 'foo keywords'
-          promo_text: 'foo promo text'
-        seo_for_user:
-          title: 'hello user - %{foo}'
-          description: 'description for user - %{foo}'
-          keywords: 'keywords for user - %{foo}'
-          promo_text: 'promo text for user - %{foo}'
-          header: 'header for user - %{foo}'
-        seo_for_guest:
-          title: 'hello guest - %{foo}'
-          description: 'descritpion for guest - %{foo}'
-          keywords: 'keywords for guest - %{foo}'
-          promo_text: 'promo text for guest - %{foo}'
-          header: 'header for guest - %{foo}'
-        title: 'awesome title'
-        header: 'awesome header'
-        description: 'awesome descritpion'
-        keywords: 'awesome keywords'
-        promo_text: 'awesome promo text'
-      foo:
-        title: 'title with vars %{foo}'
-        header: 'header with vars %{foo}'
-        description: 'description with vars %{foo}'
-        keywords: 'keywords with vars %{foo}'
-        promo_text: 'promo text with vars %{foo}'
+          title: 'title with vars %{foo}'
+          header: 'header with vars %{foo}'
+          description: 'description with vars %{foo}'
+          keywords: 'keywords with vars %{foo}'
+          promo_text: 'promo text with vars %{foo}'

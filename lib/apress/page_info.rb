@@ -9,6 +9,8 @@ module Apress
   module PageInfo
     extend ActiveSupport::Concern
 
+    CONTROLLER_NAME_TAIL = /Controller$/.freeze
+
     autoload :Meta, 'apress/page_info/meta'
 
     included do
@@ -91,7 +93,11 @@ module Apress
     #
     # Returns Array, list of different conditions
     def seo_config
-      Apress::PageInfo::SeoConfig.storage[:"#{controller_name}/#{action_name}"]
+      return @seo_config if defined?(@seo_config)
+
+      controller_fullname = self.class.name.sub(CONTROLLER_NAME_TAIL, '').underscore
+
+      @seo_config = Apress::PageInfo::SeoConfig.storage[:"#{controller_fullname}##{action_name}"]
     end
 
     # Internal: finds suitable condition of seo

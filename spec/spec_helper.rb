@@ -1,12 +1,12 @@
-# coding: utf-8
 # frozen_string_literal: true
 
 require 'bundler/setup'
 require 'simplecov'
+require 'pry-byebug'
 
 SimpleCov.start 'rails' do
   minimum_coverage 95
-  add_filter "apress/page_info/version.rb"
+  add_filter 'apress/page_info/version.rb'
 end
 
 require 'apress/page_info'

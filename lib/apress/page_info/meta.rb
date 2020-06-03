@@ -3,6 +3,13 @@
 module Apress
   module PageInfo
     class Meta
+      CONTROLLER_TAIL = /_controller$/.freeze
+      private_constant :CONTROLLER_TAIL
+      SYMBOL_AFTER_SPACE = / ([\,\.\:\!])/.freeze
+      private_constant :SYMBOL_AFTER_SPACE
+      SPACES_RE = /[ ]+/.freeze
+      private_constant :SPACES_RE
+
       attr_accessor :controller
       alias_method :c, :controller
 
@@ -106,13 +113,14 @@ module Apress
         )
 
         return I18n.t!("#{action_scope.join('.')}.#{postfix_key}", vars) if postfix_key
+
         I18n.t!(action_key, vars)
       end
 
       def action_scope
         @action_scope ||= [
           :pages,
-          c.class.name.underscore.gsub('/', '.').gsub(/_controller$/, ''),
+          c.class.name.underscore.gsub('/', '.').sub(CONTROLLER_TAIL, ''),
           c.params[:action]
         ]
       end
@@ -120,7 +128,7 @@ module Apress
       def controller_scope
         @controller_scope ||= [
           :pages,
-          c.class.name.underscore.gsub('/', '.').gsub(/_controller$/, '')
+          c.class.name.underscore.gsub('/', '.').sub(CONTROLLER_TAIL, '')
         ]
       end
 
@@ -133,39 +141,46 @@ module Apress
       # это использовать в наследниках
       def set_title_variables(vars)
         raise ArgumentError unless vars.is_a?(Hash)
+
         @title_variables = vars.symbolize_keys
       end
 
       # это использовать в наследниках
       def set_title_key(key)
         raise ArgumentError unless key.is_a?(String)
+
         @title_key = key
       end
 
       def set_postfix_key(key)
         raise ArgumentError unless key.is_a?(String)
+
         @postfix_key = key
       end
 
       # это использовать в наследниках
       def set_header_key(key)
         raise ArgumentError unless key.is_a?(String)
+
         @header_key = key
       end
 
       # это использовать в наследниках
       def set_description_key(key)
         raise ArgumentError unless key.is_a?(String)
+
         @description_key = key
       end
 
       def set_keywords_key(key)
         raise ArgumentError unless key.is_a?(String)
+
         @keywords_key = key
       end
 
       def set_promo_text_key(key)
         raise ArgumentError unless key.is_a?(String)
+
         @promo_text_key = key
       end
 
@@ -186,7 +201,7 @@ module Apress
       end
 
       def compact_spaces(value)
-        value.gsub(/[ ]+/, ' ').gsub(/ ([\,\.\:\!])/, '\1')
+        value.gsub(SPACES_RE, ' ').gsub(SYMBOL_AFTER_SPACE, '\1')
       end
 
       def set_custom_description(description)
