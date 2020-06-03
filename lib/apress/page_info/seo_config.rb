@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 
 require 'apress/page_info/seo/dsl/configuration'
 require 'apress/page_info/seo/dsl/condition'

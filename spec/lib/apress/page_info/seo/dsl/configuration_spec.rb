@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 
 RSpec.describe Apress::PageInfo::Seo::Dsl::Configuration do
   describe '#config' do

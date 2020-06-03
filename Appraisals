@@ -1,3 +1,4 @@
+# frozen_string_literal: true
 appraise 'rails4.0' do
   gem 'rails', '~> 4.0.0'
   gem 'protected_attributes'
