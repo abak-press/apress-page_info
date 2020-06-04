@@ -10,6 +10,7 @@ module Apress
     extend ActiveSupport::Concern
 
     CONTROLLER_NAME_TAIL = /Controller$/.freeze
+    PAGE_SEO_META = %w(title description keywords header promo_text).freeze
 
     autoload :Meta, 'apress/page_info/meta'
 
@@ -82,7 +83,7 @@ module Apress
     #
     # Returns nothing
     def seo_for_page
-      %w(title description keywords header promo_text).each do |meta|
+      PAGE_SEO_META.each do |meta|
         send("set_#{meta}_key", "#{seo_condition[:prefix]}#{meta}")
       end
 
