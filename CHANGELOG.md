@@ -1,6 +1,15 @@
+# v1.0.0
+
+* 2020-07-14 [b9cbd1e](../../commit/b9cbd1e) - __(Andrew N. Shalaev)__ Release v1.0.0 
+* 2020-06-04 [8cf36ee](../../commit/8cf36ee) - __(Andrew N. Shalaev)__ fix: extract array to constant 
+* 2020-06-03 [68d023a](../../commit/68d023a) - __(Andrew N. Shalaev)__ fix: take into account namespace of controller 
+https://jira.railsc.ru/browse/BPC-16830
+
+* 2020-06-03 [9a645f4](../../commit/9a645f4) - __(Andrew N. Shalaev)__ feature: freeze all strings 
+* 2020-06-03 [9b60085](../../commit/9b60085) - __(Andrew N. Shalaev)__ fix: remove rails3.2 support and dependency from railsc.ru source 
+
 # v0.5.0
 
-* 2020-02-20 [5dc3bbe](../../commit/5dc3bbe) - __(terentev)__ Release 0.5.0 
 * 2020-01-23 [3a2b0e6](../../commit/3a2b0e6) - __(terentev)__ feat: add ability to set custom description 
 https://jira.railsc.ru/browse/GOODS-2164
 
