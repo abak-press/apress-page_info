@@ -1,8 +1,4 @@
-appraise 'rails3.2' do
-  gem 'rails', '~> 3.2.0'
-  gem "strong_parameters", ">= 0.2", require: false
-end
-
+# frozen_string_literal: true
 appraise 'rails4.0' do
   gem 'rails', '~> 4.0.0'
   gem 'protected_attributes'

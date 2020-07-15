@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
 require 'apress/page_info/version'
@@ -28,4 +29,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'combustion'
   spec.add_development_dependency 'tzinfo'
   spec.add_development_dependency 'actionpack', '>= 3.2', '< 5.0'
+  spec.add_development_dependency 'pry-byebug'
 end

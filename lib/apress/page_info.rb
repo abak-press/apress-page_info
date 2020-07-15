@@ -1,4 +1,5 @@
 # coding: utf-8
+# frozen_string_literal: true
 
 require 'apress/page_info/version'
 require 'active_support'
@@ -7,6 +8,9 @@ require 'apress/page_info/seo_config'
 module Apress
   module PageInfo
     extend ActiveSupport::Concern
+
+    CONTROLLER_NAME_TAIL = /Controller$/.freeze
+    PAGE_SEO_META = %w(title description keywords header promo_text).freeze
 
     autoload :Meta, 'apress/page_info/meta'
 
@@ -79,7 +83,7 @@ module Apress
     #
     # Returns nothing
     def seo_for_page
-      %w(title description keywords header promo_text).each do |meta|
+      PAGE_SEO_META.each do |meta|
         send("set_#{meta}_key", "#{seo_condition[:prefix]}#{meta}")
       end
 
@@ -90,7 +94,11 @@ module Apress
     #
     # Returns Array, list of different conditions
     def seo_config
-      Apress::PageInfo::SeoConfig.storage[:"#{controller_name}/#{action_name}"]
+      return @seo_config if defined?(@seo_config)
+
+      controller_fullname = self.class.name.sub(CONTROLLER_NAME_TAIL, '').underscore
+
+      @seo_config = Apress::PageInfo::SeoConfig.storage[:"#{controller_fullname}##{action_name}"]
     end
 
     # Internal: finds suitable condition of seo
