@@ -11,3 +11,4 @@ end
 
 # NameError: uninitialized constant Pry::Command::ExitAll при попытке выполнить require 'pry-byebug'
 gem 'pry', '< 0.13.0', require: false
+gem 'rspec-rails', '>= 3.3', '<= 3.9', require: false
