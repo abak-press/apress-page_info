@@ -1,6 +1,10 @@
+# v1.0.1
+
+* 2021-07-22 [7fdccb3](../../commit/7fdccb3) - __(Andrew N. Shalaev)__ Release v1.0.1 
+* 2021-07-22 [242b7d8](../../commit/242b7d8) - __(Andrew N. Shalaev)__ feature: add support for ruby2.4 
+
 # v1.0.0
 
-* 2020-07-14 [b9cbd1e](../../commit/b9cbd1e) - __(Andrew N. Shalaev)__ Release v1.0.0 
 * 2020-06-04 [8cf36ee](../../commit/8cf36ee) - __(Andrew N. Shalaev)__ fix: extract array to constant 
 * 2020-06-03 [68d023a](../../commit/68d023a) - __(Andrew N. Shalaev)__ fix: take into account namespace of controller 
 https://jira.railsc.ru/browse/BPC-16830
