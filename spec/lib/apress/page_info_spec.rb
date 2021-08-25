@@ -13,7 +13,7 @@ RSpec.describe Apress::PageInfo, type: :controller do
     define_seo_for :index
 
     def index
-      render nothing: true
+      head :ok
     end
   end
 
