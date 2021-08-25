@@ -69,7 +69,11 @@ module Apress
       #
       # Returns nothing
       def define_seo_for(*actions)
-        before_filter :seo_for_page, only: actions
+        if Rails.version > '5.0'
+          before_action :seo_for_page, only: actions
+        else
+          before_filter :seo_for_page, only: actions
+        end
       end
     end
 

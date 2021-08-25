@@ -18,7 +18,7 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ['lib']
 
-  spec.add_runtime_dependency 'activesupport', '>= 3.2', '< 5.0'
+  spec.add_runtime_dependency 'activesupport', '>= 4.0.13'
 
   spec.add_development_dependency 'bundler'
   spec.add_development_dependency 'rake'
@@ -28,6 +28,6 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'appraisal', '>= 1.0.2'
   spec.add_development_dependency 'combustion'
   spec.add_development_dependency 'tzinfo'
-  spec.add_development_dependency 'actionpack', '>= 3.2', '< 5.0'
+  spec.add_development_dependency 'actionpack', '>= 4.0.13'
   spec.add_development_dependency 'pry-byebug'
 end
