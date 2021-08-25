@@ -1,6 +1,10 @@
+# v1.1.0
+
+* 2021-08-25 [8f6abba](../../commit/8f6abba) - __(Andrew N. Shalaev)__ Release v1.1.0 
+* 2021-08-25 [70307b7](../../commit/70307b7) - __(Andrew N. Shalaev)__ feature: add support for next vesion of actionpack and activesupport 
+
 # v1.0.1
 
-* 2021-07-22 [7fdccb3](../../commit/7fdccb3) - __(Andrew N. Shalaev)__ Release v1.0.1 
 * 2021-07-22 [242b7d8](../../commit/242b7d8) - __(Andrew N. Shalaev)__ feature: add support for ruby2.4 
 
 # v1.0.0
