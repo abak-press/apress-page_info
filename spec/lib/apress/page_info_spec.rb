@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 AnonymousController = Class.new(ActionController::Base)
+# frozen_string_literal: true
 
 RSpec.describe Apress::PageInfo, type: :controller do
   controller AnonymousController do

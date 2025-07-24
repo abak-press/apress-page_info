@@ -1,4 +1,4 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 require 'apress/page_info/version'
 require 'active_support'
