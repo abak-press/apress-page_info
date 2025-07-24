@@ -1,30 +1,34 @@
-build:
-  test:
-    image: abakpress/dind-testing
-    pull: true
-    privileged: true
-    volumes:
-      - /home/data/drone/images:/images
-      - /home/data/drone/gems:/bundle
-      - /home/data/drone/key_cache:/ssh_keys
+---
+kind: pipeline
+type: docker
+name: build
+
+volumes:
+  - name: bundle
+    host:
+      path: /home/data/drone/gems
+  - name: keys
+    host:
+      path: /home/data/drone/key_cache
+
+spec_step_common: &spec_step_common
+  pull: if-not-exists
+  volumes:
+    - name: bundle
+      path: /bundle
+    - name: keys
+      path: /ssh_keys
+  commands:
+    - rm -fr Gemfile.lock gemfiles/
+    - eval $(ssh-agent -s)
+    - ssh-add /ssh_keys/id_rsa
+    - bundle install -j 5
+    - bundle exec appraisal install
+    - bundle exec appraisal bundle exec rspec
+
+steps:
+  - name: build on ruby2.4
+    image: abakpress/ruby-app:2.4-latest
     environment:
-      - COMPOSE_FILE_EXT=drone
-      - RUBY_IMAGE_TAG=2.2-latest
-    commands:
-      - prepare-build
-
-      - fetch-images
-        --image whilp/ssh-agent
-        --image abakpress/ruby-app:$RUBY_IMAGE_TAG
-
-      - dip ssh add -T -v /ssh_keys -k /ssh_keys/id_rsa
-      - dip provision
-      - dip rspec
-
-  release:
-    image: abakpress/gem-publication
-    pull: true
-    when:
-      event: push
-    commands:
-      - release-gem
+      BUNDLE_PATH: /bundle/2.4
+    <<: *spec_step_common

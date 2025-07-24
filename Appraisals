@@ -1,19 +1,12 @@
-appraise 'rails3.2' do
-  gem 'rails', '~> 3.2.0'
-  gem "strong_parameters", ">= 0.2", require: false
+# frozen_string_literal: true
+if RUBY_VERSION < '2.4'
+  appraise 'activesupport4.0' do
+    gem 'activesupport', '~> 4.0.0'
+    gem 'actionpack', '~> 4.0.0'
+  end
 end
 
-appraise 'rails4.0' do
-  gem 'rails', '~> 4.0.0'
-  gem 'protected_attributes'
-end
-
-appraise 'rails4.1' do
-  gem 'rails', '~> 4.1.0'
-  gem 'protected_attributes'
-end
-
-appraise 'rails4.2' do
-  gem 'rails', '~> 4.2.0'
-  gem 'protected_attributes'
+appraise 'activesupport4.2' do
+  gem 'activesupport', '~> 4.2.0'
+  gem 'actionpack', '~> 4.2.0'
 end
