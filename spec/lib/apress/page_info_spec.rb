@@ -1,6 +1,7 @@
 require 'spec_helper'
 
 AnonymousController = Class.new(ActionController::Base)
+# frozen_string_literal: true
 
 RSpec.describe Apress::PageInfo, type: :controller do
   controller AnonymousController do
@@ -9,7 +10,7 @@ RSpec.describe Apress::PageInfo, type: :controller do
     define_seo_for :index
 
     def index
-      render nothing: true
+      head :ok
     end
   end
 

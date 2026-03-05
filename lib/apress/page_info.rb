@@ -1,4 +1,4 @@
-# coding: utf-8
+# frozen_string_literal: true
 
 require 'apress/page_info/version'
 require 'active_support'
@@ -52,7 +52,11 @@ module Apress
       #
       # Returns nothing
       def define_seo_for(*actions)
-        before_filter :seo_for_page, only: actions
+        if Rails.version > '5.0'
+          before_action :seo_for_page, only: actions
+        else
+          before_filter :seo_for_page, only: actions
+        end
       end
     end
 

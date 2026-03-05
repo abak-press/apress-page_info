@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Apress
   module PageInfo
     VERSION = '0.2.0'
